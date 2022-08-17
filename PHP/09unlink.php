@@ -1,0 +1,6 @@
+<?php
+
+
+unlink("text.txt")
+
+?>
