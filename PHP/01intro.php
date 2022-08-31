@@ -20,7 +20,7 @@
     <p>This was followed by Zend Engine 2 at the heart of PHP 5.</p>
     <p>On 1 July 2004, PHP 5 was released, powered by the new Zend Engine II.[7] PHP 5 included new features such as improved support for object-oriented programming, the PHP Data Objects (PDO) extension (which defines a lightweight and consistent interface for accessing databases), and numerous performance enhancements.[26] In 2008, PHP 5 became the only stable version under development. Late static binding had been missing from previous versions of PHP, and was added in version 5.3.[27][28]</p>
     <p>Many high-profile open-source projects ceased to support PHP 4 in new code from February 5, 2008, because of the GoPHP5 initiative,[29] provided by a consortium of PHP developers promoting the transition from PHP 4 to PHP 5.</p>
-    <?php echo $Sum = 50+50; ?>
+    <?php error_reporting(0); echo $Sum = 50+"80A"; ?>
     <?php echo $Sum1 = "tets"; ?>
     <p>Loosly type variable declataion not to be required before its use, data type not sticted </p>
     <p>Fast Response from Server</p>
