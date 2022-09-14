@@ -25,6 +25,16 @@ class Controller{
                     // include_once("views/maincontent.php");
                     // include_once("views/footer.php");
                     break;
+                case '/signin':
+                    include_once("views/headersubpages.php");
+                    include_once("views/loginpage.php");
+                    include_once("views/footer.php");
+                    break;
+                case '/registration':
+                    include_once("views/headersubpages.php");
+                    include_once("views/registration.php");
+                    include_once("views/footer.php");
+                    break;
                 
                 default:
                     # code...
