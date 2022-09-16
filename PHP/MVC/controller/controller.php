@@ -1,9 +1,11 @@
 <?php
-
-class Controller{
+session_start();
+include_once("model/model.php");
+class Controller extends Model{
     // public $base_url = "http://localhost/laravel/11JulyMWF3/25JulyMWF3/PHP/MVC/";
     public $base_url = "";
     public function __construct() {
+        parent::__construct();
         // echo "<pre>";
         // print_r($_SERVER);
         $ArrOfReq = explode("/",$_SERVER['REQUEST_URI']);
@@ -34,12 +36,28 @@ class Controller{
                     include_once("views/headersubpages.php");
                     include_once("views/registration.php");
                     include_once("views/footer.php");
+                    // echo "<pre>";
+                    // print_r($_REQUEST);
+                    if (isset($_POST['registraion'])) {
+                        $FetchAllUsersData = $this->insert('user',array("user_name"=>$_POST['username'],"password"=>$_POST['password'],"email"=>$_POST['email'],"mobile"=>$_POST['mobile'],"gender"=>$_POST['gender']));
+                    }
+                    break;
+                case '/showallusers':
+                    echo "showallusers";
+                    echo "<pre>";
+                    $FetchAllUsersData = $this->select('users');
+                    print_r($FetchAllUsersData);
+                    // include_once("views/headersubpages.php");
+                    // include_once("views/registration.php");
+                    // include_once("views/footer.php");
                     break;
                 
                 default:
                     # code...
                     break;
             }
+        }else{
+            header("location:home");
         }
     }
 

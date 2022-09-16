@@ -19,9 +19,9 @@
     <link rel="stylesheet" href="assets/css/style-starter.css">
 </head>
 <script>
-    if (window.history.replaceState) {
-        window.history.replaceState(null, null, window.location.href);
-    }
+    // if (window.history.replaceState) {
+    //     window.history.replaceState(null, null, window.location.href);
+    // }
 </script>
 
 <body>
