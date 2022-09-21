@@ -10,7 +10,7 @@
     </section> -->
 <section class="locations-1" id="locations">
     <style>
-        input[type="radio"] {
+        input[type="radio"],input[type="checkbox"] {
             -webkit-appearance: auto !important;
             outline: auto !important;
         }
@@ -39,6 +39,11 @@
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col">
+                                        <input type="text" placeholder="Enter Fullname" class="form-control" name="fullname" id="fullname">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
                                         <input type="email" placeholder="Enter Email" class="form-control" name="email" id="email">
                                     </div>
                                 </div>
@@ -55,14 +60,32 @@
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col">
-                                        <input type="password" placeholder="Enter Password" class="form-control" name="password" id="password">
+                                        <input type="checkbox" name="hobbies[]" value="Cricket" id="Cricket"> <label for="Cricket"> Cricket</label>
+                                        <input type="checkbox" name="hobbies[]" value="Music" id="Music"> <label for="Music"> Music</label>
+                                        <input type="checkbox" name="hobbies[]" value="Reading" id="Reading"> <label for="Reading"> Reading</label>
                                     </div>
                                 </div>
-                                <!-- <div class="row mt-3">
-                                <div class="col">
-                                    <input type="file" name="profile_pic" id="profile_pic">
+                                <div class="row mt-3">
+                                    <?php // echo "<pre>"; print_r($allCitiesData); ?>
+                                    <div class="col">
+                                        <select name="city" class="form-control" id="city">
+                                            <option value="">--Select City--</option>
+                                            <?php
+                                            foreach ($allCitiesData['Data'] as $key => $value) {
+                                                echo '<option value="'.$value->id.'">'.$value->name.'</option>';
+                                            }
+                                            ?>
+                                            <!-- <option value="1">Ahemdabad</option>
+                                            <option value="2">Baroda</option>
+                                            <option value="3">Surat</option> -->
+                                        </select>
+                                    </div>
                                 </div>
-                            </div> -->
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <input type="file" name="prof_pic" id="prof_pic">
+                                    </div>
+                                </div>
                                 <div class="row mt-3">
                                     <div class="col text-center">
                                         <input type="submit" class="btn btn-primary" name="registraion" id="registraion">

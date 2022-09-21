@@ -10,27 +10,29 @@
                         Login
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <input type="text" placeholder="Enter User Name or Email" class="form-control" name="username" id="username">
+                        <form method="post">
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" placeholder="Enter User Name or Email" class="form-control" name="username" id="username" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col">
-                                <input type="text" placeholder="Enter Password" class="form-control" name="password" id="password">
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <input type="text" placeholder="Enter Password" class="form-control" name="password" id="password">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col text-center">
-                                <input type="submit" class="btn btn-primary" name="login" id="login" value="Login">
-                                <input type="reset" class="btn btn-danger" name="login" id="login">
+                            <div class="row mt-3">
+                                <div class="col text-center">
+                                    <input type="submit" class="btn btn-primary" name="login" id="login" value="Login">
+                                    <input type="reset" class="btn btn-danger" name="login" id="login">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col text-center">
-                                <a href="registration">Click here for new account</a>
+                            <div class="row mt-3">
+                                <div class="col text-center">
+                                    <a href="registration">Click here for new account</a>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
