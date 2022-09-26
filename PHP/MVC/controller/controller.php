@@ -95,17 +95,29 @@ class Controller extends Model{
                     include_once("views/admin/dashboard.php");
                     include_once("views/admin/footer.php");
                     break;
-                case '/showallusers':
-                    echo "showallusers";
-                    echo "<pre>";
-                    $FetchAllUsersData = $this->select('users');
-                    print_r($FetchAllUsersData);
-                    // include_once("views/headersubpages.php");
-                    // include_once("views/registration.php");
-                    // include_once("views/footer.php");
+                case '/allusers':
+                    $FetchAllUsersData = $this->select('users',array("role_id"=>2,"status"=>1));
+                    // $FetchAllUsersData = $this->select('users');
+                    // print_r($FetchAllUsersData);
+                    include_once("views/admin/header.php");
+                    include_once("views/admin/allusersview.php");
+                    include_once("views/admin/footer.php");
                     break;
-                
-                default:
+                case '/addnewuser':
+                    include_once("views/admin/header.php");
+                    include_once("views/admin/addnewuser.php");
+                    include_once("views/admin/footer.php");
+                    break;
+                case '/deleteuser':
+                    // echo "<pre>";
+                    // // print_r($_SERVER);
+                    // print_r($_REQUEST);
+                    // print_r($_GET);
+                    $FetchAllUsersData = $this->delete('users',array("id"=>$_GET['userid'],"status"=>1));
+                    header("location:allusers");
+                    break;
+                    
+                    default:
                     # code...
                     break;
             }

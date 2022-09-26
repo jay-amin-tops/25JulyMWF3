@@ -7,7 +7,7 @@ class Model
     public $dbConnection = "";
     public function __construct()
     {
-        
+
         // $this->dbConnection = new mysqli("hostname","username","password","databasename")
         try {
             $this->dbConnection = new mysqli("localhost", "root", "", "masterdatabase");
@@ -30,42 +30,27 @@ class Model
         // echo "<pre>";
         // print_r($this->dbConnection);
     }
-    public function select($tbl)
+    public function select($tbl, $where = "")
     {
-        // SELECT Query START
+        // echo "SELECT * FROM users WHERE role_id=2";
+        // echo"<br>";
         $SQL = "SELECT * FROM $tbl";
-        // SELECT Query END
-        // Execute SELECT Query on Database START
-        $SQLEx = $this->dbConnection->query($SQL);
-        // Execute SELECT Query on Database END
+        if ($where != "") {
+            # code...
+            $SQL .= " WHERE ";
+            foreach ($where as $key => $value) {
+                $SQL .= " $key = '$value' AND";
+            }
+            $SQL = rtrim($SQL, "AND");
+        }
+        // echo $SQL;
         // echo "<pre>";
-        // print_r($SQLEx );
-        // Condition for getting data from DB START
+        // print_r($where);
+        $SQLEx = $this->dbConnection->query($SQL);
         if ($SQLEx->num_rows > 0) {
-            // $Data = $SQLEx->fetch_array();
-            // echo "<pre>";
-            // print_r($Data);
-            // print_r($Data[0]);
-            // print_r($Data['id']);
-            // $Data = $SQLEx->fetch_assoc();
-            // echo "<pre>";
-            // print_r($Data);
-            // print_r($Data['id']);
-            // $Data = $SQLEx->fetch_row();
-            // echo "<pre>";
-            // print_r($Data);
-            // print_r($Data[1]);
-            // $Data = $SQLEx->fetch_object();
-            // echo "<pre>";
-            // print_r($Data);
-            // print_r($Data->username);
-            // Fetch multiple data with object formate START
             while ($fData = $SQLEx->fetch_object()) {
                 $FetchData[] = $fData; // Store Data in array
             }
-            // Fetch multiple data with object formate END
-            // echo "<pre>";
-            // print_r($FetchData);
             $Data["Msg"] = "Success";
             $Data["Data"] = $FetchData;
             $Data["Code"] = 1;
@@ -77,9 +62,9 @@ class Model
         return $Data;
         // Condition for getting data from DB END
     }
-    public function login($uname,$pass)
+    public function login($uname, $pass)
     {
-        $SQL = 'SELECT * FROM `users` WHERE (`username`="'.$uname.'" OR `email` ="'.$uname.'" OR `mobile` ="'.$uname.'") AND password ="'.$pass.'"';
+        $SQL = 'SELECT * FROM `users` WHERE (`username`="' . $uname . '" OR `email` ="' . $uname . '" OR `mobile` ="' . $uname . '") AND password ="' . $pass . '"';
         $SQLEx = $this->dbConnection->query($SQL);
         if ($SQLEx->num_rows > 0) {
             while ($fData = $SQLEx->fetch_object()) {
@@ -124,9 +109,27 @@ class Model
         }
         return $Data;
     }
-    public function delete()
+    public function delete($tbl, $whr)
     {
-        $SQL = "";
+        $SQL = "DELETE FROM $tbl";
+        $SQL .= " WHERE ";
+        foreach ($whr as $key => $value) {
+            $SQL .= " $key = $value AND";
+        }
+        $SQL = rtrim($SQL,"AND") ;
+        // exit;
+        $SQLEx = $this->dbConnection->query($SQL);
+        if ($SQLEx > 0) {
+            $Data["Msg"] = "Success";
+            $Data["Data"] = 1;
+            $Data["Code"] = 1;
+        } else {
+            $Data["Msg"] = "Try again";
+            $Data["Data"] = 0;
+            $Data["Code"] = 0;
+        }
+        return $Data;
+        // Condition for getting data from DB END
     }
 }
 
