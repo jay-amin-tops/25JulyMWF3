@@ -81,9 +81,31 @@ class Model
         return $Data;
         // Condition for getting data from DB END
     }
-    public function update()
+    public function update($tbl,$data,$where)
     {
-        $SQL = "";
+        $SQL = "UPDATE $tbl SET ";
+        foreach ($data as $key => $value) {
+            $SQL .= " $key = '$value',";
+        }
+        $SQL = rtrim($SQL, ",");
+        $SQL .= " WHERE ";
+        foreach ($where as $key => $value) {
+            $SQL .= " $key = '$value' AND";
+        }
+        $SQL = rtrim($SQL, "AND");
+        $SQLEx = $this->dbConnection->query($SQL);
+        print_r($SQLEx);
+        // exit;
+        if ($SQLEx > 0) {
+            $Data["Msg"] = "Success";
+            $Data["Data"] = 1;
+            $Data["Code"] = 1;
+        } else {
+            $Data["Msg"] = "Try again";
+            $Data["Data"] = 0;
+            $Data["Code"] = 0;
+        }
+        return $Data;
     }
     public function insert($tbl, $data)
     {

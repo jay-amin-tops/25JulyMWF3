@@ -63,7 +63,6 @@ class Controller extends Model{
                     // echo "<pre>";
                     // print_r($_REQUEST);
                     if (isset($_POST['registraion'])) {
-                        $hobb = implode(',', $_POST['hobbies']);
                         // $InsertArray= array("username"=>$_POST['username'],
                         // "password"=>$_POST['password'],
                         // "fullname"=>$_POST['fullname'],
@@ -75,6 +74,7 @@ class Controller extends Model{
                         // echo "<pre>";
                         // print_r($InsertArray);
                         // print_r($_REQUEST);
+                        $hobb = implode(',', $_POST['hobbies']);
                         array_pop($_POST);
                         unset($_POST['hobbies']);
                         $InsertArray = array_merge($_POST,array("hobby"=>$hobb));
@@ -107,6 +107,26 @@ class Controller extends Model{
                     include_once("views/admin/header.php");
                     include_once("views/admin/addnewuser.php");
                     include_once("views/admin/footer.php");
+                    break;
+                case '/edituser':
+                    $UsersDataById = $this->select("users",array("id"=>$_REQUEST['userid']));
+                    $allCountriesData = $this->select("country");
+                    // echo "<pre>";
+                    // print_r($UsersDataById);
+                    // exit;
+                    include_once("views/admin/header.php");
+                    include_once("views/admin/edituser.php");
+                    include_once("views/admin/footer.php");
+                    if (isset($_REQUEST['update'])) {
+                        // $hobb = implode(',', $_POST['hobbies']);
+                        // array_pop($_POST);
+                        // unset($_POST['hobbies']);
+                        // $UpdateData = array_merge($_POST,array("hobby"=>$hobb));
+                        $UpdateData = array("username"=>$_POST['username']);
+                        $UpdateWhereData = array("id"=>$_REQUEST['userid']);
+                        $this->update("users",$UpdateData,$UpdateWhereData);
+
+                    }
                     break;
                 case '/deleteuser':
                     // echo "<pre>";
