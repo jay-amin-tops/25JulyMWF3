@@ -1,5 +1,8 @@
 <?php
-
+// function addition($a,$b){
+//     return 10+10;
+// }
+// addition(50,60);
 // $arr = array("tops","Techno");
 $arr = array(100,200,300,400);
 // echo "<pre>";
@@ -11,12 +14,14 @@ $arr = array(100,200,300,400);
 //     # code...
 //     echo $value;
 // }
-function AccessArrayUseFilter($arRec){
-    return $arRec+5;
+function AccessArrayUseFilter($kaioan){
+    // echo $arRec+5;
+    return $kaioan+5;
 }
 $arrFilter = array_filter($arr,"AccessArrayUseFilter");
 echo "<pre>";
 // print_r($arr);
+echo "========== array_filter ========= ";
 print_r($arrFilter);
 
 function AccessArrayUseMap($arRec){
@@ -24,6 +29,7 @@ function AccessArrayUseMap($arRec){
 }
 $arrMapRes = array_map("AccessArrayUseMap",$arr);
 // print_r($arr);
+echo "========== array_map ========= ";
 print_r($arrMapRes);
 
 function AccessArrayUseWalk($arRec,$arrD){

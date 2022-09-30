@@ -31,7 +31,7 @@
                                     <label for="fullname">Full Name</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" value="<?php echo $UsersDataById['Data'][0]->fullname; ?>"  class="form-control" name="fullname" id="fullname">
+                                    <input type="text" value="<?php echo $UsersDataById['Data'][0]->fullname; ?>" class="form-control" name="fullname" id="fullname">
                                 </div>
                             </div>
                             <div class="row">
@@ -39,7 +39,7 @@
                                     <label for="email">Email</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" value="<?php echo $UsersDataById['Data'][0]->email; ?>"  class="form-control" name="email" id="email">
+                                    <input type="text" value="<?php echo $UsersDataById['Data'][0]->email; ?>" class="form-control" name="email" id="email">
                                 </div>
                             </div>
                             <div class="row">
@@ -47,7 +47,7 @@
                                     <label for="mobile">Mobile</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" value="<?php echo $UsersDataById['Data'][0]->mobile; ?>"  class="form-control" name="mobile" id="mobile">
+                                    <input type="text" value="<?php echo $UsersDataById['Data'][0]->mobile; ?>" class="form-control" name="mobile" id="mobile">
                                 </div>
                             </div>
                             <div class="row">
@@ -55,12 +55,12 @@
                                     <label for="Gender">Gender</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="radio"  <?php if ($UsersDataById['Data'][0]->gender == "Male") {
-                                        echo "checked";
-                                    }  ?>  name="gender" id="Male" value="Male"> <label for="Male"> Male</label>
-                                    <input type="radio"  <?php if ($UsersDataById['Data'][0]->gender == "Female") {
-                                        echo "checked";
-                                    }  ?>  name="gender" id="Female" value="Female"> <label for="Female"> Female</label>
+                                    <input type="radio" <?php if ($UsersDataById['Data'][0]->gender == "Male") {
+                                                            echo "checked";
+                                                        }  ?> name="gender" id="Male" value="Male"> <label for="Male"> Male</label>
+                                    <input type="radio" <?php if ($UsersDataById['Data'][0]->gender == "Female") {
+                                                            echo "checked";
+                                                        }  ?> name="gender" id="Female" value="Female"> <label for="Female"> Female</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -68,10 +68,26 @@
                                     <label for="">Hobbies</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="checkbox" name="chk[]" id="Cricket" value="Cricket"> <label for="Cricket">Cricket</label>
-                                    <input type="checkbox" name="chk[]" id="Music" value="Music"> <label for="Music">Music</label>
-                                    <input type="checkbox" name="chk[]" id="Travelling" value="Travelling"> <label for="Travelling">Travelling</label>
-                                    <input type="checkbox" name="chk[]" id="Reading" value="Reading"> <label for="Reading">Reading</label>
+                                    <?php
+                                    $arrayofHobby = explode(",", $UsersDataById['Data'][0]->hobby);
+                                    // echo "<pre>";
+                                    // print_r($arrayofHobby);
+                                    // var_dump(in_array("Cricket",$arrayofHobby));
+                                    // var_dump(in_array("Travelling",$arrayofHobby));
+                                    // echo "</pre>";
+                                    ?>
+                                    <input type="checkbox" name="chk[]" <?php if (in_array("Cricket", $arrayofHobby)) {
+                                                                            echo "checked";
+                                                                        } ?> id="Cricket" value="Cricket"> <label for="Cricket">Cricket</label>
+                                    <input type="checkbox" <?php if (in_array("Cricket", $arrayofHobby)) {
+                                                                echo "checked";
+                                                            } ?> name="chk[]" id="Music" value="Music"> <label for="Music">Music</label>
+                                    <input type="checkbox" <?php if (in_array("Travelling", $arrayofHobby)) {
+                                                                echo "checked";
+                                                            } ?> name="chk[]" id="Travelling" value="Travelling"> <label for="Travelling">Travelling</label>
+                                    <input type="checkbox" <?php if (in_array("Reading", $arrayofHobby)) {
+                                                                echo "checked";
+                                                            } ?> name="chk[]" id="Reading" value="Reading"> <label for="Reading">Reading</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -81,10 +97,9 @@
                                 <div class="col-md-8">
                                     <select name="country" id="Country">
                                         <option value="">Select country</option>
-                                        <?php
-                                            foreach ($allCountriesData['Data'] as $countrykey => $countryvalue) { ?>
-                                                <option value="<?php echo $countryvalue->country_id; ?>"><?php echo $countryvalue->country_name; ?></option>
-                                            <?php } ?>
+                                        <?php foreach ($allCountriesData['Data'] as $countrykey => $countryvalue) { ?>
+                                            <option value="<?php echo $countryvalue->country_id; ?>"><?php echo $countryvalue->country_name; ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -94,6 +109,10 @@
                                 </div>
                                 <div class="col-md-8">
                                     <select name="state" id="State">
+                                        <option value="">Select State</option>
+                                        <?php foreach ($allStateData['Data'] as $StateKey => $StateValue) { ?>
+                                            <option value="<?php echo $StateValue->stateid; ?>"><?php echo $StateValue->state_title; ?></option>
+                                        <?php } ?>
 
                                     </select>
                                 </div>
@@ -103,7 +122,12 @@
                                     <label for="City">City</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <select name="city" id="City"></select>
+                                    <select name="city" id="city">
+                                        <option value="">Select City</option>
+                                        <?php foreach ($allCitiesData['Data'] as $CityKey => $CityValue) { ?>
+                                            <option value="<?php echo $CityValue->id; ?>"><?php echo $CityValue->name; ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">

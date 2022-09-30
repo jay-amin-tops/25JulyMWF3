@@ -2,6 +2,7 @@
 echo "<pre>";
 echo "<br>============================= Fill ================================= <br>";
 
+// $a1=array_fill(starting,total_element,"value");
 $a1=array_fill(10,4,"blue");
 print_r($a1);
 

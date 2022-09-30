@@ -92,7 +92,7 @@ class Model
         foreach ($where as $key => $value) {
             $SQL .= " $key = '$value' AND";
         }
-        $SQL = rtrim($SQL, "AND");
+        echo $SQL = rtrim($SQL, "AND");
         $SQLEx = $this->dbConnection->query($SQL);
         print_r($SQLEx);
         // exit;

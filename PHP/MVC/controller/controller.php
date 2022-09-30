@@ -54,6 +54,7 @@ class Controller extends Model{
                     break;
                 case '/registration':
                     $allCitiesData = $this->select("cities_data");
+                    
                     // echo "<pre>";
                     // print_r($allCitiesData);
                     // echo "</pre>";
@@ -111,6 +112,8 @@ class Controller extends Model{
                 case '/edituser':
                     $UsersDataById = $this->select("users",array("id"=>$_REQUEST['userid']));
                     $allCountriesData = $this->select("country");
+                    $allStateData = $this->select("state");
+                    $allCitiesData = $this->select("cities_data");
                     // echo "<pre>";
                     // print_r($UsersDataById);
                     // exit;
@@ -118,12 +121,32 @@ class Controller extends Model{
                     include_once("views/admin/edituser.php");
                     include_once("views/admin/footer.php");
                     if (isset($_REQUEST['update'])) {
-                        // $hobb = implode(',', $_POST['hobbies']);
-                        // array_pop($_POST);
-                        // unset($_POST['hobbies']);
-                        // $UpdateData = array_merge($_POST,array("hobby"=>$hobb));
+                        $hobb = implode(',', $_POST['chk']);
+                        array_pop($_POST);
+                        unset($_POST['chk']);
+                        unset($_POST['country']);
+                        unset($_POST['state']);
                         $UpdateData = array("username"=>$_POST['username']);
                         $UpdateWhereData = array("id"=>$_REQUEST['userid']);
+                        // echo "<pre>";
+                        // print_r($GLOBALS);
+                        // echo "</pre>";
+                        if (isset($_FILES['prof_pic'])) {
+                            if ($_FILES['prof_pic']['error'] == 0) {
+                                if ($_FILES['prof_pic']['size'] < 500000) {
+                                    $tmp_name = $_FILES['prof_pic']['tmp_name'];
+                                    $file_name = $_FILES['prof_pic']['name'];
+                                    move_uploaded_file($tmp_name, "uploads/$file_name");
+                                }else{
+                                    $file_name ="default.jpg";
+                                }
+                            }else{
+                                $file_name ="default.jpg";
+                            }
+                        }else{
+                            $file_name ="default.jpg";
+                        }
+                        $UpdateData = array_merge($_POST,array("hobby"=>$hobb,"prof_pic"=>$file_name));
                         $this->update("users",$UpdateData,$UpdateWhereData);
 
                     }
