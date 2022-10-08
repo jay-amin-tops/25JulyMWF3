@@ -3,7 +3,6 @@
         <div class="col_3">
             <div class="clearfix"> </div>
         </div>
-
         <div class="charts">
             <div class="mid-content-top charts-grids">
                 <div class="middle-content">
@@ -18,6 +17,7 @@
                     <hr>
                     <div class="card">
                         <form enctype="multipart/form-data" method="post">
+                            <!-- <img name="myimg" src="https://m.media-amazon.com/images/I/31jo5pyShXL._SY445_SX342_QL70_FMwebp_.jpg" alt=""> -->
                             <div class="row">
                                 <div class="col-md-2">
                                     <label for="username">User Name</label>
@@ -135,7 +135,8 @@
                                     <label for="profile_pic">Profile Pic</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="file" name="prof_pic" id="prof_pic">
+                                    <input type="text" value="<?php echo $UsersDataById['Data'][0]->prof_pic; ?>" name="prof_old_pic" id="prof_old_pic">
+                                    <input type="file" value="<?php $UsersDataById['Data'][0]->prof_pic; ?>" name="prof_pic" id="prof_pic">
                                 </div>
                             </div>
                             <div class="row">

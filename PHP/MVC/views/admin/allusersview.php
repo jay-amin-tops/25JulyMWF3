@@ -23,6 +23,7 @@
                                 <th>Email</th>
                                 <th>Gender</th>
                                 <th>Mobible</th>
+                                <th>Image</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -35,6 +36,7 @@
                                 <td><?php echo $value->email;?></td>
                                 <td><?php echo $value->gender;?></td>
                                 <td><?php echo $value->mobile;?></td>
+                                <td><img src="uploads/<?php echo $value->prof_pic;?>" alt="no image"> </td>
                                 <td>
                                     <a class="btn btn-sm btn-primary" href="edituser?userid=<?php echo $value->id;?>"><i class="fa fa-pencil"></i> </a>
                                     <a class="btn btn-sm btn-danger" href="deleteuser?userid=<?php echo $value->id;?>"><i class="fa fa-trash"></i> </a>
