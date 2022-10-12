@@ -97,10 +97,27 @@
                                 <div class="col-md-8">
                                     <select name="country" id="Country">
                                         <option value="">Select country</option>
-                                        <?php foreach ($allCountriesData['Data'] as $countrykey => $countryvalue) { ?>
-                                            <option value="<?php echo $countryvalue->country_id; ?>"><?php echo $countryvalue->country_name; ?></option>
-                                        <?php } ?>
+                                       
                                     </select>
+                                    <script>
+                                        // fetch()
+                                        $.ajax({
+                                            url:"http://localhost/laravel/11JulyMWF3/25JulyMWF3/PHP/API/allcountries",
+                                            success:function(response){
+                                                // console.log(response);
+                                                data = JSON.parse(response)
+                                                console.log(data.Data);
+                                                htmloption = "<option>Select country</option>"
+                                                data.Data.forEach(element => {
+                                                    // console.log(element);
+                                                    htmloption += "<option>"+element.country_name+"</option>"
+
+                                                });
+                                                console.log(htmloption);
+                                                $("#Country").html(htmloption);
+                                            }
+                                        })
+                                    </script>
                                 </div>
                             </div>
                             <div class="row">
