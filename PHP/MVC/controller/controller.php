@@ -110,7 +110,8 @@ class Controller extends Model{
                     include_once("views/admin/footer.php");
                     break;
                 case '/edituser':
-                    $UsersDataById = $this->select("users",array("id"=>$_REQUEST['userid']));
+                    // $UsersDataById = $this->select("users",array("id"=>$_REQUEST['userid']));
+                    $UsersDataById = $this->select_join("users",array("cities_data"=>"users.city=cities_data.id","state"=>"cities_data.state_id=state.steteid","country"=>"state.countryid=country.country_id"),array("users.id"=>$_REQUEST['userid']));
                     $allCountriesData = $this->select("country");
                     $allStateData = $this->select("state");
                     $allCitiesData = $this->select("cities_data");

@@ -95,28 +95,52 @@
                                     <label for="Country">Country</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <select name="country" id="Country">
+                                    <?php //echo "<pre>"; print_r($allCountriesData['Data'] ); ?>
+                                    <select name="country" id="Country" onchange="getStateDataByCountryId(this)">
                                         <option value="">Select country</option>
-                                       
+                                        <?php foreach ($allCountriesData['Data'] as $CountryKey => $CountryValue) { ?>
+                                            <option <?php if ($UsersDataById['Data'][0]->country_id == $CountryValue->country_id) {
+                                               echo "selected";
+                                            } ?>  value="<?php echo $CountryValue->country_id; ?>"><?php echo $CountryValue->country_name; ?></option>
+                                        <?php } ?>
                                     </select>
                                     <script>
-                                        // fetch()
-                                        $.ajax({
-                                            url:"http://localhost/laravel/11JulyMWF3/25JulyMWF3/PHP/API/allcountries",
+                                        function getStateDataByCountryId(e) {
+                                            $.ajax({
+                                            url:"http://localhost/laravel/11JulyMWF3/25JulyMWF3/PHP/API/allstatebycountryid",
+                                            data:{countryid:this.value},
                                             success:function(response){
                                                 // console.log(response);
                                                 data = JSON.parse(response)
                                                 console.log(data.Data);
-                                                htmloption = "<option>Select country</option>"
+                                                htmloption = "<option>Select state</option>"
                                                 data.Data.forEach(element => {
                                                     // console.log(element);
                                                     htmloption += "<option>"+element.country_name+"</option>"
 
                                                 });
                                                 console.log(htmloption);
-                                                $("#Country").html(htmloption);
+                                                $("#State").html(htmloption);
                                             }
                                         })
+                                        }
+                                        // fetch()
+                                        // $.ajax({
+                                        //     url:"http://localhost/laravel/11JulyMWF3/25JulyMWF3/PHP/API/allcountries",
+                                        //     success:function(response){
+                                        //         // console.log(response);
+                                        //         data = JSON.parse(response)
+                                        //         console.log(data.Data);
+                                        //         htmloption = "<option>Select country</option>"
+                                        //         data.Data.forEach(element => {
+                                        //             // console.log(element);
+                                        //             htmloption += "<option>"+element.country_name+"</option>"
+
+                                        //         });
+                                        //         console.log(htmloption);
+                                        //         $("#Country").html(htmloption);
+                                        //     }
+                                        // })
                                     </script>
                                 </div>
                             </div>
@@ -125,10 +149,16 @@
                                     <label for="State">State</label>
                                 </div>
                                 <div class="col-md-8">
+                                    <?php 
+                                    // echo "<pre>";
+                                    // print_r($UsersDataById['Data'][0]); 
+                                    ?>
                                     <select name="state" id="State">
                                         <option value="">Select State</option>
-                                        <?php foreach ($allStateData['Data'] as $StateKey => $StateValue) { ?>
-                                            <option value="<?php echo $StateValue->stateid; ?>"><?php echo $StateValue->state_title; ?></option>
+                                        <?php foreach ($allStateData['Data'] as $StateKey => $StateValue) {  ?>
+                                            <option <?php if ($UsersDataById['Data'][0]->steteid == $StateValue->steteid) {
+                                               echo "selected";
+                                            } ?>  value="<?php echo $StateValue->steteid; ?>"><?php echo $StateValue->state_title; ?></option>
                                         <?php } ?>
 
                                     </select>
@@ -142,7 +172,9 @@
                                     <select name="city" id="city">
                                         <option value="">Select City</option>
                                         <?php foreach ($allCitiesData['Data'] as $CityKey => $CityValue) { ?>
-                                            <option value="<?php echo $CityValue->id; ?>"><?php echo $CityValue->name; ?></option>
+                                            <option <?php if ($UsersDataById['Data'][0]->city == $CityValue->id) {
+                                               echo "selected";
+                                            } ?>  value="<?php echo $CityValue->id; ?>"><?php echo $CityValue->name; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
