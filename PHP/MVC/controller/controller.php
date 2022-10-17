@@ -156,6 +156,14 @@ class Controller extends Model{
 
                     }
                     break;
+                case '/allstatebycountryid':
+                    $allStateDataByCountryId = $this->select("state",array("countryid"=>$_REQUEST['countryid']));
+                    echo json_encode($allStateDataByCountryId);
+                    break;
+                case '/allcitiesbystateid':
+                    $allStateDataByCountryId = $this->select("cities_data",array("state_id"=>$_REQUEST['stateid']));
+                    echo json_encode($allStateDataByCountryId);
+                    break;
                 case '/deleteuser':
                     // echo "<pre>";
                     // // print_r($_SERVER);
