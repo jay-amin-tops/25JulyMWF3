@@ -1,0 +1,22 @@
+1) create assets folder inside public folder
+2) copy all req files from HTML template folder to our public/assets folder
+3) for backup copy layout/app.blade.php
+4) layout/app.blade.php [new] paste header footer code from template file
+5) for path 
+6) config/app.php
+	    'asset_url' => env('ASSET_URL', 'http://localhost:8000/assets/'),
+7) create @yield('hardysh') in layout/app.blade.php
+8) @extends('layouts.app')
+
+@section('hardysh')
+your code  
+@endsection	
+
+
+
+
+
+
+Laravel Custom Macros Link START
+https://medium.com/@NahidulHasan/how-to-use-macros-in-laravel-a9078a0610f9
+Laravel Custom Macros Link END
