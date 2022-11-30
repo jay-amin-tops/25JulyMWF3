@@ -1,5 +1,12 @@
 @extends('layouts.appadmin')
 
+@push('scripts')
+<script>
+    function checkreq(e, spnid) {
+        (e.value == "") ? $("#" + spnid).html("This Field is Required"): $("#" + spnid).html("")
+    }
+</script>
+@endpush
 @section('content')
 
 <div class="row">
@@ -28,13 +35,19 @@
                         <div class="row mt-3">
                             <div class="col">
                                 <label for="">Product Title</label>
+                                <!-- {{ Form::text("title","", ['class' => 'form-control','placeholder'=>"Enter Product Title","required"=>"required", "onblur"=>"checkreq(this,'titleError')"]) }} -->
                                 {{ Form::text("title","", ['class' => 'form-control','placeholder'=>"Enter Product Title"]) }}
+                                <span id="titleError"></span>
+                                @error('title')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col">
                                 {{ Form::label('description', 'Description') }}
                                 {{ Form::textarea("description","", ['class' => 'form-control','placeholder'=>"Enter Product Description"]) }}
+                                <span id="descriptionError"></span>
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -45,13 +58,22 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col">
-                            <label for="">Product Quantity</label>
+                                <label for="">Product Quantity</label>
                                 <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Quantity">
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col">
                                 <input type="submit" class="btn btn-primary" name="btn-save" id="btn-save" value="Add">
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>

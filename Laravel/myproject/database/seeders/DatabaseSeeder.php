@@ -12,10 +12,12 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+    // fakeProducts::class,
     public function run()
     {
         $this->call([
-            fakeProducts::class,
+            Author::class,
+            Books::class,
         ]);
         // \App\Models\User::factory(10)->create();
 

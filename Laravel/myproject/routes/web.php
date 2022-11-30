@@ -31,7 +31,9 @@ Route::view('/testroute', 'mypage');
 // Route::resource('/home', [App\Http\Controllers\HomeController::class]);
 // Route::view('/home', "view page");
 Route::get('/allproducts', [App\Http\Controllers\ProductController::class, 'index']);
+// Route::get('/allproductsdatatable', [App\Http\Controllers\ProductController::class, 'index']);
 // Route::get('/allproducts', [App\Http\Controllers\HomeController, 'index']);
+Route::view('/admin', "admindashboard");
 Route::get('/addnewproduct', [App\Http\Controllers\ProductController::class, 'create']);
 Route::post('/storeproduct', [App\Http\Controllers\ProductController::class, 'store']);
 Route::get('/deleteprod/{prodid?}', [App\Http\Controllers\ProductController::class, 'destroy']);
@@ -39,3 +41,14 @@ Route::get('/editprod/{prodid?}', [App\Http\Controllers\ProductController::class
 Route::post('/saveeditedproduct/{prodid?}', [App\Http\Controllers\ProductController::class, 'update']);
 Route::view('/sendmailtestview', 'sendmailtestview');
 Route::any('/sendmailtest', [App\Http\Controllers\HomeController::class, 'sendmail']);
+
+Route::get('generate-pdf', [App\Http\Controllers\ProductController::class, 'generatePDF']);
+
+Route::get('/users', [App\Http\Controllers\ProductController::class, 'index'])->name('users.index');
+// Route::get('/datatablecalling', [App\Http\Controllers\ProductController::class, 'datatablecalling'])->name('users');
+Route::get('/querybuilder', [App\Http\Controllers\ProductController::class, 'customQueryBuilder']);
+Route::get('/eloqunatquery', [App\Http\Controllers\ProductController::class, 'eloqunatQueryJoin']);
+
+
+Route::view('/ajaxexample', 'ajaxview');
+Route::get('/selectallcategorydata', [App\Http\Controllers\AjaxXontroller::class, 'index']);
