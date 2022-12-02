@@ -52,3 +52,4 @@ Route::get('/eloqunatquery', [App\Http\Controllers\ProductController::class, 'el
 
 Route::view('/ajaxexample', 'ajaxview');
 Route::get('/selectallcategorydata', [App\Http\Controllers\AjaxXontroller::class, 'index']);
+Route::any('/savecategorydata', [App\Http\Controllers\AjaxXontroller::class, 'store']);

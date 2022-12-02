@@ -41,7 +41,7 @@
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <form method="post">
+                            <form method="post" id="category_form">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Add New Category</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -52,12 +52,13 @@
 
                                     <div class="row">
                                         <div class="col">
-                                            <input type="text" class="form-control" placeholder="Enter Category" name="" id="">
+                                            <input type="text" class="form-control" value="{{ csrf_token() }}" name="_token" id="_token">
+                                            <input type="text" class="form-control" placeholder="Enter Category" name="category_title" id="category_title">
                                         </div>
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col">
-                                            <textarea name="description" placeholder="Enter Description" id="description" class="form-control" cols="50" rows="3"></textarea>
+                                            <textarea name="category_description" placeholder="Enter Description" id="category_description" class="form-control" cols="50" rows="3"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -92,6 +93,10 @@
     // });
     $(window).on('load', function(e) {
         // alert("load")
+        fetchData()
+    })
+
+    function fetchData(){
         $.ajax({
             url: "selectallcategorydata",
             success: function(response) {
@@ -108,15 +113,33 @@
                 $("#DispCate").html(htmlTableData)
             }
         })
-    })
-
+    }
     function savecategorydata() {
         event.preventDefault();
-        // console.log("called");
+        // let category = document.getElementById("category_title").value
+        // let category_description = $("#category_description").val();
+        // var formSerialize = $('#category_form').serialize();
+        // var formSerializeArray = $('#category_form').serializeArray();
+
+        // console.log(formSerialize);
+        // console.log(formSerializeArray);
+        var result = { };
+        $.each($('#category_form').serializeArray(), function() {
+            result[this.name] = this.value;
+        });
         $.ajax({
-            url: "selectallcategorydata",
+            type: "POST",
+            dataType: "json",
+            data: result,
+            url: "savecategorydata",
             success: function(response) {
                 console.log(response);
+                if (response == 1) {
+                    $('#exampleModal').modal('hide');
+                    fetchData()
+                } else {
+                    alert("Error while inserting")
+                }
             }
         })
     }
